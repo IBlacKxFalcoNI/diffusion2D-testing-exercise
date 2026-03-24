@@ -38,6 +38,9 @@ class SolveDiffusion2D:
         self.dt = None
 
     def initialize_domain(self, w=10., h=10., dx=0.1, dy=0.1):
+        assert w > 0 and h > 0 and dx > 0 and dy > 0, "Domain dimensions and intervals must be positive"
+        assert type(w) in [float, np.double] and type(h) in [float, np.double] 
+        assert type(dx) in [float, np.double] and type(dy) in [float, np.double]
         self.w = w
         self.h = h
         self.dx = dx
@@ -45,7 +48,11 @@ class SolveDiffusion2D:
         self.nx = int(w / dx)
         self.ny = int(h / dy)
 
-    def initialize_physical_parameters(self, d=4., T_cold=300, T_hot=700):
+    def initialize_physical_parameters(self, d=4., T_cold=300., T_hot=700.):
+        assert d > 0
+        assert type(d) == float
+        assert T_cold > 0 and T_hot > 0
+        assert type(T_cold) in [float, np.double] and type(T_hot) in [float, np.double]
         self.D = d
         self.T_cold = T_cold
         self.T_hot = T_hot
